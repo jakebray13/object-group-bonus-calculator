@@ -5,9 +5,12 @@ var scout = { name: "Scout", employeeNumber: "6243", annualSalary: "74750", revi
 var robert = { name: "Robert", employeeNumber: "26835", annualSalary: "66000", reviewRating: 1 };
 var mayella = { name: "Mayella", employeeNumber: "89068", annualSalary: "35000", reviewRating: 2 };
 
-var employees = [ atticus, jem, boo, scout, robert, mayella ];
+var employees = [ robert, atticus, jem, boo, scout, mayella ];
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
+$(document).ready(function() {
+  $("#showBonus").on('click', showBonusText);
+});
 
 function bonusCalculator(employeeObject) {
   if (employeeObject.reviewRating <= 2) {
@@ -28,19 +31,33 @@ function bonusCalculator(employeeObject) {
   if (employeeObject.annualSalary > 65000) {
     employeeObject.bonusPercentage -= 0.01;
   }
-  if (employeeObject.totalBonus > 13) {
-    employeeObject.totalBonus = 13;
+  if (employeeObject.bonusPercentage > 13) {
+    employeeObject.bonusPercentage = 13;
   }
-  if (employeeObject.totalBonus <= 0) {
-    employeeObject.totalBonus = 0;
+  if (employeeObject.bonusPercentage <= 0) {
+    employeeObject.bonusPercentage = 0;
   }
 
   employeeObject.totalBonus = Math.round(employeeObject.annualSalary * employeeObject.bonusPercentage);
   employeeObject.totalCompensation = Math.round(employeeObject.annualSalary) + employeeObject.totalBonus;
 }
 
-for (var i = 0; i < employees.length; i++) {
-  bonusCalculator(employees[i]);
-}
+
 
 console.log(employees);
+
+function showBonusText() {
+  for (var j = 0; j < employees.length; j++) {
+    bonusCalculator(employees[j]);
+  }
+  for (var i = 0; i < employees.length; i++) {
+    $('ul').append('<h2>Employee</h2>');
+    $('ul').append('<li>Name:' , employees[i].name+'</li>');
+    $('ul').append('<li>Employee Number:' , employees[i].employeeNumber+'</li>');
+    $('ul').append('<li>Annual Salary:' , employees[i].annualSalary+'</li>');
+    $('ul').append('<li>Review Rating:' , employees[i].reviewRating+'</li>');
+    $('ul').append('<li>Total Compensation:' , employees[i].totalCompensation+'</li>');
+    $('ul').append('<li>Total Bonus:' , employees[i].totalBonus+'</li>');
+    $('ul').append('<br>');
+  }
+}
