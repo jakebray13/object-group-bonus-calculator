@@ -9,4 +9,38 @@ var employees = [ atticus, jem, boo, scout, robert, mayella ];
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
 
+function bonusCalculator(employeeObject) {
+  if (employeeObject.reviewRating <= 2) {
+    employeeObject.bonusPercentage = 0;
+  }
+  else if (employeeObject.reviewRating <= 3) {
+    employeeObject.bonusPercentage = 0.04;
+  }
+  else if (employeeObject.reviewRating <= 4) {
+    employeeObject.bonusPercentage = 0.06;
+  }
+  else if (employeeObject.reviewRating <= 5) {
+    employeeObject.bonusPercentage = 0.1;
+  }
+  if (employeeObject.employeeNumber.length == 4) {
+    employeeObject.bonusPercentage += 0.05;
+  }
+  if (employeeObject.annualSalary > 65000) {
+    employeeObject.bonusPercentage -= 0.01;
+  }
+  if (employeeObject.totalBonus > 13) {
+    employeeObject.totalBonus = 13;
+  }
+  if (employeeObject.totalBonus <= 0) {
+    employeeObject.totalBonus = 0;
+  }
+
+  employeeObject.totalBonus = Math.round(employeeObject.annualSalary * employeeObject.bonusPercentage);
+  employeeObject.totalCompensation = Math.round(employeeObject.annualSalary) + employeeObject.totalBonus;
+}
+
+for (var i = 0; i < employees.length; i++) {
+  bonusCalculator(employees[i]);
+}
+
 console.log(employees);
