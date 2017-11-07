@@ -31,8 +31,8 @@ function bonusCalculator(employeeObject) {
   if (employeeObject.annualSalary > 65000) {
     employeeObject.bonusPercentage -= 0.01;
   }
-  if (employeeObject.bonusPercentage > 13) {
-    employeeObject.bonusPercentage = 13;
+  if (employeeObject.bonusPercentage > 0.13) {
+    employeeObject.bonusPercentage = 0.13;
   }
   if (employeeObject.bonusPercentage <= 0) {
     employeeObject.bonusPercentage = 0;
